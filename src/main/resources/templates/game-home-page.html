@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the word</title>
+
+    <script th:inline = "javascript">
+   window.onload = function checkIfGameover(){
+            var numberOftries = [[${numberoftries}]];
+            if(numberOftries==0){
+                alert("Game Over");
+                document.getElementById('guessedChar').disabled = true;
+                document.getElementById('try').disabled = true;
+            }
+        }
+
+        function reloadGame(){
+            window.location. href = "http://localhost:8080/reload";
+        }
+    </script>
+
+</head>
+<body>
+<h1 align="center">Guess the word</h1>
+<h2 align="center" th:text="${word}">The random word is ${word}</h2>
+<h3 align="right" th:text="'Tries Remaining : ' + ${numberoftries}"></h3>
+<hr>
+<input type="button" align="right" value="reload" style="float:right" onclick="reloadGame()">
+<div align="center">
+    <form action="/game-home" method="GET" >
+        <label>Guess a Char</label>
+        <input type="text" name="guessedChar" id="guessedChar" align="center" />
+        <input type="submit" value="try" id="try"/>
+    </form>
+</div>
+
+</body>
+</html>
